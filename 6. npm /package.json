@@ -1,0 +1,14 @@
+{
+  "name": "my",
+  "version": "1.0.0",
+  "description": "### nvm 切换版本 ```js nvm --version nvm install <version> nvm use  <version> nvm install <version> ```",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "my": "./bin/index.js"
+  },
+  "author": "olifer",
+  "license": "ISC"
+}
