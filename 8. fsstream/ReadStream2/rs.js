@@ -26,7 +26,9 @@ fileStream.on('data', (data) => { // buffer
   fileStream.pause(); // 暂停读取
 })
 
-
+setTimeout(() => {
+  fileStream.resume(); // 恢复读
+}, 1000) 
 
 // 读完
 fileStream.on('end', () => { // buffer

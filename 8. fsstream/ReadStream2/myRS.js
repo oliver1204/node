@@ -35,7 +35,7 @@ class myRS extends EventEmitter {
 
     })
   }
-  read() {  // 发布订阅
+  read() {  // 发布订阅 - Readable
     if(typeof this.fd !== 'number') {
       // 第一次调read 不会立即执行，而是等this.emit('open', fd)后再执行
       return this.once('open', this.read); 
