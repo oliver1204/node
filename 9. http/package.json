@@ -1,0 +1,23 @@
+{
+  "name": "static-http",
+  "version": "1.0.0",
+  "description": "通常的网络是在tcp/ip协议的基础上运行的，http是一个子集",
+  "main": "1. http.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "static-http": "./bin/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mime": "^2.4.4"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.1.1",
+    "nunjucks": "^3.2.0",
+    "yargs": "^15.1.0"
+  }
+}
