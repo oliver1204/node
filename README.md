@@ -13,14 +13,17 @@
 
 1.7 [fs文件模块以及stream流的原理和应用](https://github.com/olifer655/node/blob/master/8.%20fsstream/README.md)
 
-1.8 [tcp和http服务]
+1.8 tcp和http服务
+
     1.8.1 [ http中静态服务的编写](https://github.com/olifer655/node/blob/master/9.%20http/README.md)
+    
     1.8.2 [ajax 的使用和跨域](https://github.com/olifer655/node/tree/master/11.%20ajax)
-    1.8.4 [压缩](https://github.com/olifer655/node/blob/master/10.%20cache/README.md)
+    
+    1.8.4 [压缩与解压缩](https://github.com/olifer655/node/blob/master/10.%20cache/README.md)
+    
     1.8.5 [多语言切换](https://github.com/olifer655/node/blob/master/10.%20cache/README.md)
 
 
-压缩与解压缩
 加密和签名算法
 
 多进程与集群
