@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/8. fsstream/ReadStream2/rs.js"
+      "program": "${workspaceFolder}/10. cache/4cache.js"
     }
   ]
 }

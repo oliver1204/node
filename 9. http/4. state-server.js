@@ -40,7 +40,37 @@ class Server {
       this.sendError(e, res);
     }
   }
+  hasCache(currentPath, req, res) {
+    // 加一次缓存
+    res.setHeader('Cache-Control', 'max-age=10');
+    res.setHeader('Expires', new Date(Date.now() + 10 * 1000).toGMTString())
+
+    // 对比缓存
+    let ctime = stats.ctime.toGMTString() // 修改时间
+    let ifModifiedSince = req.headers['If-Modified-Since']
+    res.setHeader('Last-Modified', ctime)
+
+    let content = readFileSync(currentPath, 'utf8')
+    let etag = crypto.createHash('md5').update(content).digest('base64');
+    let ifNoneMatch = req.headers['if-none-match'];
+    
+    res.setHeader('ETag', etag);
+
+    if(ifModifiedSince === ctime) {
+      return true
+    }
+    if(ifNoneMatch === etag) {
+      return true
+    }
+    return false
+  }
   sendFile(currentPath, req, res, stats) {
+    // 加入缓存
+    if(this.hasCache(currentPath, req, res)) {
+      res.statusCode = 304;
+      return res.end()
+    }
+
     res.setHeader('Content-Type', `${mime.getType(currentPath)};charset=UTF-8`);
     createReadStream(currentPath).pipe(res);
   }

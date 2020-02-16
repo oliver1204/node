@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "commander": "^4.1.0"
+    "commander": "^4.1.0",
+    "crypto": "^1.0.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.0",

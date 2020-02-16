@@ -1,5 +1,3 @@
-## npm
-
 ### nvm 切换版本
 ```js
 nvm --version
@@ -69,5 +67,6 @@ npm version [<newversion> | major | minor | patch ]
 - 3. 检查版本和名称
 - 4. 切换到官网中发布`nrm use npm`
 - 5. 登录npm账号密码
+  - npm addUser
 - 6. 发布 `npm publish`
 - 7. 撤销发布 `npm ubpublish --forces`

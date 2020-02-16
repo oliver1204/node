@@ -13,7 +13,8 @@
 
 1.7 [fs文件模块以及stream流的原理和应用](https://github.com/olifer655/node/blob/master/8.%20fsstream/README.md)
 
-1.8 [tcp和http服务]()
+1.8 [tcp和http服务](https://github.com/olifer655/node/blob/master/9.%20http/README.md)
+
 
 压缩与解压缩
 加密和签名算法
