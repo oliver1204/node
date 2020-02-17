@@ -1,74 +1,155 @@
-# http  的应用
-## 1. 内容概括
-### 1.1 什么是http
-通常的网络是在tcp/ip协议的基础上运行的，http是一个子集
+## ajax 的使用和跨域
 
-### 1.2 tcp/ip协议族
+1. cors
 
-http 是应用层的协议，在传输层的基础上增加了一些自己的内容
+```js
+// 指定允许其他域名访问
+res.setHeader('Access-Control-Allow-Origin', '*'); // * 无法设置cookie
+// 响应类型
+res.setHeader('Access-Control-Allow-Methods', 'POST');
+// 响应头设置
+res.setHeader('Access-Control-Allow-Headers', 'x-requested-with,content-type')
+// 多久内可以不发options请请求
+res.setHeader('Access-Control-Max-Age', '1800'); // 30分钟内不发
 
-协议简单的来说就是通信规则，例如：通信时谁发起请求，怎么结束，如何进行通信，把互联网相关的协议统称起来称为tcp/ip协议
+```
 
-### 1.3 协议分层（osi 协议分层）
+2.jsonp
 
-（物、数）、网、传 、（会、表、应）
+动态的引入一个js脚本，此处不做详细讲述
 
-* 应用层HTTP, FTP, DNS (与其他计算机进行通讯的一个应用服务，向用户提供应用服务时的通信活动)
-* 传输层TCP（可靠） UDP数据传输(HTPP -> TCP, NDS -> UDP)
-* 网络层 IP 选择传输的路线（通过IP地址和Mac地址）（使用ARP协议凭借Mac地址进行通信）
-* 链路层网络（物、数合称链路层）连接的硬件部分
+## 防盗链
 
-### 1.4 http 的特点
-* http是不保存状态的协议，使用cookie来管理状态（登录先给你cookie 我可以看一下你有没有cookie）
-* 为了防止每次请求都造成无畏的tcp连接建立和断开，所以采用保持连接的方式keep-alive
-* 以前发送请求后需要等待并接收到响应，才能发下一个，现在都是管线化的方式（js css 可以并发请求6-2）cdn
+例如我们直接地址栏访问百度上的 `https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2261545518,314917585&fm=26&gp=0.jpg` 时，完全访问。但是，当我们在自己的网站加入上面的链接的时候，百度应不允许我们访问，会直接返回一个错误提示图片的，这是为什么呢？
 
-### 1.5 http 的缺陷
-* 通信采用明文
-* 不验证通信方身份
-* 无法验证内容的完整性（内容可以被篡改）
-> 通过ssl(安全套阶层)建立安全通信线路https
+原来每张图片请求头都会带一个 `Referer` 指向图片的服务器地址，只有当请求源，和我们的 `Referer` 是同一个时，才允许访问资源。
 
-### 1.6 http 方法（get post 简单请求）resful 风格
+```js
+// 11. ajax/2server.js
+let referrer = req.headers['referer'] || req.headers['referrer']
 
-* GET
-* POST
-* PUT
-* DELETE
-* HEAD
-* OPTIONS
+if(referrer) {
+  let origin = req.headers.host.split(':')[0];
+  referrer = url.parse(referrer).hostname
 
-### 1.7. 状态码
-- 1（websocket）
-- 2 
-  - 200 成功， 
-  - 204 服务没有返回任何内容 
-  - 206 发送请求时，只请求部分内容，服务器返回 206，断点续传时经常用得到
-- 3
-  - 301 永久重定向
-  - 302 临时重定向
-  - 304 服务端缓存
-  - 306、307 重定向
+  let whiteList = ['olifer2'] // 白名单
+  if(origin !== referrer && !whiteList.includes(referrer)) {
+    let errImg = path.resolve(__dirname, './2.jpg');
+    return createReadStream(errImg).pipe(res);
+  }
+}
+```
 
-- 4
-  - 400 参数不对
-  - 401 无权限
-  - 404 登录来，但是无权限
-  - 404 找不到
-  - 405 方法不允许
-- 5 
- - 500 服务端挂了
- - 502 负载均衡超出限制
+## 多语言
+后端主要是根据 `Accept-Language: zh-CN,zh;q=0.9,en;q=0.8` 这个请求头来判断，返回不同的请求包。
 
+## gizp压缩
 
-## 2. http中静态服务的编写
+实现压缩的npm包 -- zlib
 
-我们通常用 `createServer` 创建一个http服务器。见 `9.http/1. http.js` 文件
+```bash
+npm install zlib
+```
 
-`9.http/4. state-server.js` 是我们模拟`http-server`写一个小服务，因为配置了bin,通过npm link 后，直接在命令行中`static-http`即可运行。
+```js
+const zlib = require('zlib')
+const path = require('path')
+const {
+  createReadStream,
+  createWriteStream,
+  readFileSync,
+  writeFileSync
+} = require('fs')
 
+let readAbsPath = path.resolve(__dirname, './text.txt');
+let writeAbsPath = path.resolve(__dirname, './text.zip');
 
-## 3. ajax 的使用和跨域
-## 4. http 缓存的应用
-## 5. 压缩
-## 6. 多语言切换
+// readFile模式
+let buffer = readFileSync(readAbsPath, 'utf-8')
+zlib.gzip(buffer, (err, data) => {
+  writeFileSync(writeAbsPath, data)
+})
+
+// 流模式 读一点（64kb） -> 压缩一点 -> 写入一点
+createReadStream(readAbsPath)
+.pipe(zlib.createGzip())
+.pipe(createWriteStream(writeAbsPath))
+```
+
+当浏览器去请求html等静态界面时，会带上 `Accept-Encoding: gzip, deflate, br` 指明该浏览器支持什么格式的压缩。
+
+服务端，可以根据浏览器支持的压缩格式去压缩。
+
+```js
+// 4.gzip-server.js
+// node 支持 gzip, deflate 压缩，但是不支持 br 压缩
+if(reqAcceptEncoding.match(/\bgzip\b/)) {
+  res.setHeader('Content-Encoding', 'gzip')
+  res.setHeader('Content-Type', 'text/html;charset=utf-8')
+  createReadStream(absPath).pipe(zlib.createGzip()).pipe(res)
+} else if(reqAcceptEncoding.match(/\bdeflate\b/)) {
+  res.setHeader('Content-Encoding', 'deflate')
+  res.setHeader('Content-Type', 'text/html;charset=utf-8')
+  createReadStream(absPath).pipe(zlib.createDeflate()).pipe(res)
+} else {
+  createReadStream(absPath).pipe(res)
+}
+```
+
+## 如何实现301/302
+
+301，永久重定向定向，跳过一次必须清缓存后才可以再跳另一个地址, 302 临时重定向
+
+```js
+http.createServer((req, res) => {
+  let absPath = path.join(__dirname, '/302.html' )
+  let userAgent = req.headers['user-agent']
+
+  res.statusCode = 302 
+
+  if(userAgent.match(/iPhone|Android/)) {
+    res.setHeader('Location', 'https://www.baidu.com')
+  } else {
+    res.setHeader('Location', 'https://www.google.com')
+  }
+  createReadStream(absPath).pipe(res)
+  
+}).listen(3000, () => {
+  console.log(`serverl is listen: ${chalk.blue('http://localhost:3000/302.html')}`)
+})
+```
+
+## 虚拟机、代理实现
+
+实现代理的npm包 -- http-proxy
+
+```bash
+npm install http-proxy
+```
+原理和 nginx 类似：
+```js
+const http = require('http')
+const chalk = require('chalk')
+const httpProxy = require('http-proxy') 
+const proxy = httpProxy.createProxyServer()
+const map = {
+  'olifer1:8080': 'http://localhost:3000',
+  'olifer2:8080': 'http://localhost:4000'
+}
+http.createServer((req, res) => {
+  let host = req.headers['host'];
+  console.log(host)
+  proxy.web(req, res, {
+    target: map[host]
+  })
+}).listen(8080, () => {
+  console.log(`serverl is listen: ${chalk.blue('http://olifer1:8080/')}`)
+})
+```
+
+## 206
+当我们想使用 `断点续传` 或者 `分段传输` 时，就会用到206.
+
+如果浏览器需要分段上传，那么客户端的请求头会带上 `Range: bytes=0-3`, 当发现有 Range 值后，服务器就会添加 `Accept-Range: bytes` 和 ` Content-Range: bytes 0-3/778`
+
+## cookie session jwt

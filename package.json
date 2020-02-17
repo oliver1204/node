@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "chalk": "^3.0.0",
     "commander": "^4.1.0",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "http-proxy": "^1.18.0",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "cross-env": "^7.0.0",
