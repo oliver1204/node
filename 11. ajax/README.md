@@ -151,5 +151,3 @@ http.createServer((req, res) => {
 当我们想使用 `断点续传` 或者 `分段传输` 时，就会用到206.
 
 如果浏览器需要分段上传，那么客户端的请求头会带上 `Range: bytes=0-3`, 当发现有 Range 值后，服务器就会添加 `Accept-Range: bytes` 和 ` Content-Range: bytes 0-3/778`
-
-## cookie session jwt

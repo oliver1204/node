@@ -21,10 +21,8 @@
     
    - 1.8.3 [ajax 的使用和跨域、压缩与解压缩、多语言、防盗链、正向反向代理服务器](https://github.com/olifer655/node/blob/master/11.%20ajax/README.md)
     
-   - 1.8.4 [cookie和session原理](https://github.com/olifer655/node/blob/master/12.%20session/README.md)
+   - 1.8.4 [cookie和session原理、加密和签名算法](https://github.com/olifer655/node/blob/master/12.%20session/README.md)
 
-
-加密和签名算法
 
 多进程与集群
 
