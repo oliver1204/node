@@ -27,10 +27,10 @@
 
 # 3. [MongoDB](https://github.com/olifer655/node/blob/master/MongoDB/README.md)
 
-# 4. redis[https://github.com/olifer655/node/blob/master/Redis/README.md]
+# 4. [redis](https://github.com/olifer655/node/blob/master/Redis/README.md)
 
-# 5. node 框架
-(image)[http://chuantu.xyz/t6/721/1583204637x2890186046.png]
+# 5. node 之 Express
+[image](http://chuantu.xyz/t6/721/1583204637x2890186046.png)
 
 ## express路由配置
 ## express处理参数
