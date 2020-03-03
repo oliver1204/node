@@ -27,21 +27,6 @@
 
 # 3. [MongoDB](https://github.com/olifer655/node/blob/master/MongoDB/README.md)
 
-<<<<<<< HEAD
-# 4. redis[https://github.com/olifer655/node/blob/master/Redis/README.md]
-=======
->>>>>>> d680c3001c6e0c65a7c665a0a6c8517b2298a841
+# 4. [redis](https://github.com/olifer655/node/blob/master/Redis/README.md)
 
-多进程与集群
-
-
-
-# 4. node 框架
-
-express路由配置
-express处理参数
-express使用中间件
-express模版引擎
-express静态文件服务器
-express重定向
-cookie和session原理
+# 5. [node 之 Express](https://github.com/olifer655/node/blob/master/Express/README.md)

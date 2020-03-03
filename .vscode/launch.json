@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/Express/2.server.js"
+      "program": "${workspaceFolder}/Express/4.error_handle.js"
     }
   ]
 }
