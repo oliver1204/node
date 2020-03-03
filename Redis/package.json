@@ -1,0 +1,14 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "Redis 是一个开源（BSD许可）的，高性能的 key- value 型数据库。内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^3.0.2"
+  }
+}

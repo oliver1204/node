@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/koa/1.koa.js"
+      "program": "${workspaceFolder}/Express/2.server.js"
     }
   ]
 }
