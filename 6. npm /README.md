@@ -59,7 +59,9 @@ require('../main.js');
 npm version [<newversion> | major | minor | patch ]
 ```
 ### script 脚本
-- npm run 的功能是， 将当前文件夹下的 `node_modules`的 `bin` 目录放到path 环境中，如果run 后面有命令，会执行对应的命令，这个执行的命令在`bin` 目录下可以直接执行。
+npm run 的功能是:
+- 将当前文件夹下的 `node_modules`的 `bin` 目录放到全局path 环境中执行(比如直接在命令行无法执行webpack-dev-server,但是在script下配置后，可以执行)
+- 如果run 后面有命令，会执行对应的命令，这个执行的命令在`bin` 目录下可以直接执行。
 
 ### 发包
 - 1. 先进入到要发包的文件夹中
