@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let str = `<h1>hello buffer</h1>`;
+      const blob = new Blob([str], {
+        type: 'text/html',
+      });
+      let a = document.createElement('a');
+      a.innerHTML = 'download';
+      a.setAttribute('download', 'a.html');
+      a.href = URL.createObjectURL(blob);
+      document.body.appendChild(a);
+    </script>
+  </body>
+</html>
