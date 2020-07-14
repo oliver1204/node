@@ -163,6 +163,22 @@ console.log(res.toString('base64'))
 
 ```
 
+## 1.4 前端buffer
+在后端中，Buffer通常是用来下载html，操作Excel等
+前端最常用的是Blob对象和Buffer连用, File 基于 Blob
+
+```js
+let str = `<h1>hello buffer</h1>`;
+const blob = new Blob([str], {
+   type: 'text/html',
+});
+let a = document.createElement('a');
+a.innerHTML = 'download';
+a.setAttribute('download', 'a.html');
+a.href = URL.createObjectURL(blob);
+document.body.appendChild(a);
+```
+
 ## 3. fs的应用流
 
 ## 3. fs的应用流
