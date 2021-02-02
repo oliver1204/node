@@ -101,6 +101,8 @@ fs.readFile('./name.txt', 'utf8', function(err, callbacks) {
 
 上图中显示的每个阶段都对应一个事件队列，当event loop执行到某个阶段时会将当前阶段对应的队列依次执行。当队列执行完毕或者执行数量超过上限时，才会转入下一个阶段。node中的微任务在切换队列时执行
 
+[由setTimeout和setImmediate执行顺序的随机性窥探Node的事件循环机制](https://segmentfault.com/a/1190000013102056?utm_source=tag-newest)
+
 ### poll 阶段阻塞
 
 当 poll 阶段中无 check 会阻塞，等待着计时器的到来，继续循环事件流机制。
