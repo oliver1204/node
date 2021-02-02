@@ -10,23 +10,24 @@ let girl = new Girl();
 
 girl.on('newListener', (event) => {
   process.nextTick(() => {
+    console.log(event);
     girl.emit(event, '我');
-  })
-})
-let f1 = (who) => {
-  console.log(who + '哈哈哈！')
-}
-girl.once('恋爱', f1)
-girl.once('恋爱', (who) => {
-  console.log(who + '亲爱的')
-})
+  });
+});
+let f1 = (who, status) => {
+  console.log(who + status);
+};
+girl.once('恋爱', () => {
+  f1('我', 'ooooo');
+});
 
-girl.on('happy', (who) => {
-  console.log(who + 'happy')
-})
+girl.on('恋爱2', () => {
+  f1('你', '也恋爱');
+});
+girl.on('happy', () => {
+  f1('她', 'happy辣');
+});
 
-girl.off('恋爱', f1)
-
-
-
-
+girl.off('恋爱', () => {
+  f1('我');
+});
